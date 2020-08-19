@@ -1,0 +1,27 @@
+class Solution {
+public:
+    int majorityElement(vector<int>& nums) {
+        if (nums.size() == 1)
+        {
+            return nums[0];
+        }
+        int const half_size = nums.size() / 2;
+        vector<int> split_lo(nums.begin(), nums.begin() + half_size);
+        vector<int> split_hi(nums.begin() + half_size, nums.end());
+        int left = majorityElement(split_lo);
+        int right = majorityElement(split_hi);
+        if (left == right)
+        {
+            return left;
+        }
+        if (count(nums.begin(), nums.end(), left) > count(nums.begin(), nums.end(), right))
+        {
+            return left;
+        }
+        else
+        {
+            return right;
+        }
+        
+    }
+};

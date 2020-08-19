@@ -1,0 +1,32 @@
+class Solution {
+public:
+    int maxSubArray(vector<int>& nums) {
+        if (nums.size() == 1)
+        {
+            return nums[0];
+        }
+        int const half_size = nums.size() / 2;
+        vector<int> split_lo(nums.begin(), nums.begin() + half_size);
+        vector<int> split_hi(nums.begin() + half_size, nums.end());
+        int left = maxSubArray(split_lo);
+        int right = maxSubArray(split_hi);
+        int l_max = split_lo[split_lo.size()-1];
+        int tmp = 0;
+        for (int a = split_lo.size()-1; a >= 0; --a)
+        {
+             tmp += split_lo[a];
+             l_max = max(l_max,tmp);
+
+        } 
+        int r_max = split_hi[0];
+        int tmp_r = 0;
+        for (int a = 0; a < split_hi.size(); ++a)
+        {
+             tmp_r += split_hi[a];
+             r_max = max(r_max,tmp_r);
+            
+        }
+        int b = max(left, right);
+        return max(b, l_max+r_max);
+    }
+};
