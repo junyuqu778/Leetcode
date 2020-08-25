@@ -1,0 +1,17 @@
+class Solution {
+public:
+    vector<int> intersection(vector<int>& nums1, vector<int>& nums2) {
+        unordered_set<int> Set_nums1(nums1.begin(), nums1.end());
+        unordered_set<int> resSet;
+
+        for(int i =0; i < nums2.size();++i)
+        {
+            if(Set_nums1.find(nums2[i]) != Set_nums1.end())
+            {
+                resSet.insert(nums2[i]);
+            }
+        }
+
+        return  vector<int>(resSet.begin(),resSet.end());
+    }
+};

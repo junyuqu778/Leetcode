@@ -1,0 +1,36 @@
+class Solution {
+public:
+    int splitArray(vector<int>& nums, int m) {
+        long l = 0, r = 0;
+        for(int num : nums)
+        {
+            l = max(l, (long)num);
+            r += num;
+        }
+
+        while(l != r)
+        {
+            long mid = (l + r) >> 1;
+            long cur = 1, temp = 0;
+            for(int num : nums)
+            {
+                if(num + temp > mid)
+                {
+                    cur++;
+                    temp = 0;
+                }
+                temp += num;
+            }
+
+            if(cur > m)
+            {
+                l = mid + 1;
+            }
+            else
+            {
+                r = mid; 
+            }
+        }
+        return l;
+    }
+};

@@ -1,0 +1,64 @@
+class Solution {
+public:
+    int searchInsert(vector<int>& nums, int target) {
+        set<int> first(nums.begin(), nums.end());
+        if (first.find(target)!=first.end())
+        {
+            return distance(first.begin(), first.find(target));
+        }
+        else
+        {
+            nums.push_back(target);
+            set<int> second (nums.begin(), nums.end());
+            return distance(second.begin(), second.find(target));
+        }
+        
+    }
+};
+
+
+class Solution {
+public:
+    int searchInsert(vector<int>& nums, int target) {
+        for(int i = 1; i <= nums.size(); i++) {
+
+            if(nums[i-1] == target) {
+                return i-1;
+            } 
+
+            // 数组的长度为1
+            // 或者 直至遍历到数组末尾时，方才发现目标值大于该末尾元素
+            if(i == nums.size()) {
+                if(target > nums[i-1]) {
+                    return i;
+                }
+            }
+
+            if(target > nums[i-1] && target < nums[i]) {
+                return i;
+            }
+        }
+
+        return 0;
+
+    }
+};
+
+
+class Solution {
+public:
+    int searchInsert(vector<int>& nums, int target) {
+        vector<int>::iterator it = std::find(nums.begin(), nums.end(), target);
+        if (it!=nums.end())
+        {
+            return distance(nums.begin(), it);
+        }
+        else
+        {
+            nums.push_back(target);
+            set<int> second (nums.begin(), nums.end());
+            return distance(second.begin(), second.find(target));
+        }
+        
+    }
+};

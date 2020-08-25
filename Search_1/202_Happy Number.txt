@@ -1,0 +1,30 @@
+class Solution {
+public:
+    bool isHappy(int n) {
+
+        set<int> already;
+        while (n != 1)
+        {
+            int bew = 0;
+            int degit;
+            while(n !=0){
+                degit = n % 10;
+                n /= 10;
+                bew += degit*degit;
+            }
+            if (already.find(bew)!=already.end())
+            {
+                return false;
+            }
+            else 
+            {
+                already.insert(bew);
+            }
+
+            n = bew;
+            cout << n << endl;
+        }
+
+        return true;
+    }
+};

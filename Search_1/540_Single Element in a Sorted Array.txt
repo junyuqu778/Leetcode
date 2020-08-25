@@ -1,0 +1,39 @@
+class Solution {
+public:
+    int singleNonDuplicate(vector<int>& nums) {
+        unordered_map<int,int> hash;
+        for(auto a:nums)
+        {
+            ++hash[a];
+        }
+       for (const auto &m : hash) {
+            if(m.second == 1)
+            {
+                return m.first;
+                }
+        }
+        return 0;
+    }
+};
+
+class Solution 
+{
+public:
+    int singleNonDuplicate(vector<int>& nums) 
+    {
+        int l = 0;
+        int h = nums.size() - 1;
+        //二分查找
+        while(l < h)
+        {
+            int mid = l + (h - l)/2;
+            if(mid % 2 == 1)               //mid如果是奇数，则左移一位
+                mid--;
+            if(nums[mid] == nums[mid+1])   //[mid+2,h]
+                l = mid + 2;
+            else                           
+                h = mid; //[l,mid]
+        } 
+        return nums[l];   
+    }
+};

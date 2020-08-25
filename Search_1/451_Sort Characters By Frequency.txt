@@ -1,0 +1,26 @@
+class Solution {
+public:
+    string frequencySort(string s) {
+
+         unordered_map<char,int> hash;
+        for (auto a : s)
+        {
+            ++hash[a];
+        }
+
+        vector<pair<char, int>> vec;
+        for (const auto &m : hash) {
+            vec.push_back(m);
+        }
+        sort(vec.begin(), vec.end(), [](const pair<char, int> &p1, const pair<char, int> &p2) { return p1.second > p2.second; });
+        string res;
+        for (auto a : vec)
+        {
+            for(int i = 0;  i < a.second; ++i)
+            {
+               res.push_back(a.first);
+            }
+        }
+    return res;
+    }
+};
