@@ -1,0 +1,38 @@
+class Solution {
+public:
+    int maxPoints(vector<vector<int>>& points) {
+        if (points.size() < 3) {
+            return points.size();
+        }
+        int res = 0;
+        double slope(0.0); //important for k
+
+        for(int i = 0; i < points.size(); ++i)
+        {
+            unordered_map<double, int> hash;
+            int curMax = 0;
+            int duplicate = 0;
+            for(int j = i +1; j < points.size(); ++j)
+            {
+                if (points[i][0] == points[j][0] && points[i][1] == points[j][1]) {
+                    duplicate += 1;
+                    continue;
+                }
+                else{
+                if (points[j][0] == points[i][0])
+                {
+                    slope = INT_MAX;
+                }
+                else
+                {
+                slope = (double)(points[j][1] - points[i][1])*1000000000000.0/(double)(points[j][0] - points[i][0]); //important for k
+                }
+                ++hash[slope];
+                }
+                curMax = max(curMax, hash[slope]);
+            }
+            res = max(res, curMax+duplicate+1);
+        }
+        return res;
+    }
+};

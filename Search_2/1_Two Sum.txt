@@ -1,0 +1,38 @@
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {  // brute force O(n^2)
+        vector<int> res;
+        for (int i = 0; i < nums.size(); ++i)
+        {
+            auto itr = find(nums.begin()+i+1,nums.end(),target-nums[i]);
+            if (itr!=nums.end())
+            {
+                res.push_back(i);
+                res.push_back(distance(nums.begin(), itr));
+            }
+        }
+        return res;
+    }
+};
+
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {  // O(n) with hash map
+        unordered_map<int,int> hash;
+        vector<int> res;
+        for(int i= 0; i < nums.size(); ++i)
+        {
+            int complement = target - nums[i];
+           // if (hash.find(complement)!=hash.end())
+            if(hash.count(complement)>0)
+            {
+                res.push_back(i);
+                res.push_back(hash[complement]);
+                return res;
+            }
+            hash[nums[i]] = i;
+        }
+
+        return res;
+    }
+};
